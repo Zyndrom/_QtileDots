@@ -104,6 +104,7 @@ keys = [
     Key([], "XF86AudioRaiseVolume", lazy.spawn("pactl set-sink-volume 0 +5%"), desc='Volume Up'),
     
     Key(["mod1"], "Shift_L", lazy.widget["keyboardlayout"].next_keyboard(), desc="Next keyboard layout."),
+    Key(["control"], "Print", lazy.spawn("sh /home/zyn/.config/qtile/screnshot.sh"), desc='Screenshot'),
 ]
 
 groups = [Group(i) for i in "123456789"]
@@ -117,7 +118,7 @@ groups = [
     Group("6", label = ""),
     Group("7", label = ""),
     Group("8", label = ""),
-    Group("9", label = ""),
+    Group("9", label = "󰓓", matches=[Match(wm_class=["steam"])]),
 ]                                                        
 
 for i in groups:
@@ -194,7 +195,8 @@ screens = [
             [
                 #widget.CurrentLayout(), # Текущий макет
                 
-		        widget.TextBox(text=" ", foreground='#00FFFF', fontsize=25,),
+		        widget.TextBox(text=" ", foreground='#00FFFF', fontsize=25,
+                         mouse_callbacks= lazy.spawn("rofi -show run")),
 		        widget.GroupBox(borderwidth=2, # Толщина рамки
                     highlight_method='block', # Метод выделения активного воркспейса
                     block_highlight_text_color='#1c102f',#'#263238',#'#263238',# Цвет текста активного воркспейса
@@ -215,6 +217,7 @@ screens = [
                     fmt='{}',
                     padding=100,
                     #background="#ff0000",
+                    max_chars=50,
                      fontsize=15,
                     update_interval=1,
                     
